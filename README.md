@@ -7,8 +7,11 @@ Using the github API, it goes through all the public and private github members 
 You will need some github organization with public and private members to test the application.
 
 Read these sites:
+
 https://developer.github.com/v3/#parameters
+
 https://developer.github.com/v3/orgs/members/#get-organization-membership
+
 https://developer.github.com/v3/users/
 
 ### Prerequisites
@@ -18,9 +21,13 @@ Netbeans or other Java IDE.
 ### Installing
 
 Install additional libraries:
+
 https://code.google.com/archive/p/json-simple/downloads    
+
 https://mvnrepository.com/artifact/javax.mail/mail/1.4.7
+
 Read this site:
+
 https://netbeans.org/kb/73/java/project-setup.html?print=yes#projects-classpath
 
 ## Running the tests
@@ -30,6 +37,7 @@ No tests were developed to the project
 ## Deployment
 
 The app is done in three steps:
+
 1)	Github API call for the organization members
 2)	Github API call for every member information
 3)	Checking the members with no name set up on github and sending them emails
@@ -40,7 +48,7 @@ N/A
 
 ## Authors
 
-* **Yura Vasiuk** - https://github.com/YuriiVasiuk/check-members
+* **Yura Vasiuk** - https://github.com/YuraVasiuk/check-members
 
 ## License
 
