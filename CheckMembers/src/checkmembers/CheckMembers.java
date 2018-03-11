@@ -2,7 +2,6 @@ package checkmembers;
 
 import java.io.*;
 import java.net.*;
-//import java.nio.charset.Charset;
 import java.util.*;
 
 import org.json.simple.parser.JSONParser;
@@ -42,29 +41,33 @@ public class CheckMembers {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        String url = "https://api.github.com/orgs/byuitechops/members";
+        Scanner reader = new Scanner(System.in); 
+        System.out.println("Input the organization name please: ");
+        String org_name = reader.nextLine();
+        String org_url = "https://api.github.com/orgs/" + org_name + "/members";
+        System.out.println("Input the admin email please: ");
+        String admin_email = reader.nextLine();
+        reader.close();
+        
+        // testing strings
+        //String url = "https://api.github.com/orgs/byuitechops/members";
         //String url = "https://api.github.com/orgs/byutest/members";
         
         // STEP 1
         // get the organization members
-        JSONArray members = getMembers(url);
+        JSONArray members = getMembers(org_url);
         // and get their logins for using in the step 2
         List<String> logins = new ArrayList<>();
-        int members_counter = 0;
         for (Object member : members){
-            members_counter++;
-            System.out.println("Member #: " + members_counter);
             String[] items = member.toString().split(",");
             for (String item : items){
                 CharSequence s = "login";
                 if (item.contains(s)){
-                    String[] temp = item.toString().split(":");
+                    String[] temp = item.split(":");
                     logins.add(temp[1]);
-                    System.out.println("Member login: " + temp[1]);
                 }  
             }
         }
-        System.out.println("All organization members have been listed.");
         System.out.println("------------------------------------------");
         
         // STEP 2
@@ -72,6 +75,7 @@ public class CheckMembers {
         Map<String, String> members_map = new TreeMap<>();
         for (String login : logins){
             login = login.substring(1, login.length() - 1);
+            System.out.println("Member login: " + login);
             String member_url = "https://api.github.com/users/" + login;
             JSONObject member_info = getMembersInfo(member_url);
             String member_info_str = member_info.toString();
@@ -81,30 +85,31 @@ public class CheckMembers {
             for (String mis_item : mis_items){
                 CharSequence s1 = "name";
                 if (mis_item.contains(s1)){
-                    String[] temp1 = mis_item.toString().split(":");
+                    String[] temp1 = mis_item.split(":");
                         name = temp1[1];
                     System.out.println("Member name: " + name);
                 }
                 CharSequence s2 = "email";
                 if (mis_item.contains(s2)){
-                    String[] temp2 = mis_item.toString().split(":");
+                    String[] temp2 = mis_item.split(":");
                         email = temp2[1];
                     System.out.println("Member email: " + email);
                 }
             }
+            // for all members' names and emails
             members_map.put(name, email);
         }
-        System.out.println(members_map);
         System.out.println("-------------------------");
         
         // STEP 3
         // send emails to the members with no names
         EmailSender email_sender = new EmailSender();
-        email_sender.sendMessage("yuravasuk.friends@gmail.com", "vas14001@byui.edu", "Yura");
         for (Map.Entry<String, String> entry : members_map.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            System.out.println(key + value);
+            if (key != null){
+                email_sender.sendEmail(value, admin_email);
+            }
         }
     }
     
