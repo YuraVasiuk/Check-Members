@@ -1,10 +1,15 @@
 # Check Members
 
-Using the github API, it goes through all the public and private github members in a github organization and, if they don't have a name filled in on their github profile, it email them saying so with a link to gi​thub.com where they can enter their name.
+Using the github API, it goes through all the public and private github members in a github organization and, if they don't have a name filled in on their github profile, it email them saying so with a link to github.com where they can enter their name.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You will need some github organization with public and private members to test the application.
+
+Read these sites:
+https://developer.github.com/v3/#parameters
+https://developer.github.com/v3/orgs/members/#get-organization-membership
+https://developer.github.com/v3/users/
 
 ### Prerequisites
 
@@ -12,53 +17,30 @@ Netbeans or other Java IDE.
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Install additional libraries:
+https://code.google.com/archive/p/json-simple/downloads    
+https://mvnrepository.com/artifact/javax.mail/mail/1.4.7
+Read this site:
+https://netbeans.org/kb/73/java/project-setup.html?print=yes#projects-classpath
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+No tests were developed to the project
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+The app is done in three steps:
+1)	Github API call for the organization members
+2)	Github API call for every member information
+3)	Checking the members with no name set up on github and sending them emails
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+N/A
 
 ## Authors
 
-* **Yura Vasiuk** - *Initial work* - (https://github.com/YuriiVasiuk)
+* **Yura Vasiuk** - https://github.com/YuriiVasiuk/check-members
 
 ## License
 
@@ -66,7 +48,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* To BYU IT department for the interesting Skill Evaluation
  
+
